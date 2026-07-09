@@ -1,149 +1,57 @@
-# 🤖 Agente Financeiro Inteligente com IA Generativa
+# 🤖 BIA: Briefing de Inteligência Automática - Assistente de Reserva & Gastos
 
-## Contexto
+> Desafio de Projeto desenvolvido para o Laboratório "Construa seu Assistente Virtual com Inteligência Artificial" da plataforma DIO.
 
-Os assistentes virtuais no setor financeiro estão evoluindo de simples chatbots reativos para **agentes inteligentes e proativos**. Neste desafio, você vai idealizar e prototipar um agente financeiro que utiliza IA Generativa para:
-
-- **Antecipar necessidades** ao invés de apenas responder perguntas
-- **Personalizar** sugestões com base no contexto de cada cliente
-- **Cocriar soluções** financeiras de forma consultiva
-- **Garantir segurança** e confiabilidade nas respostas (anti-alucinação)
-
-> [!TIP]
-> Na pasta [`examples/`](./examples/) você encontra referências de implementação para cada etapa deste desafio.
+O objetivo deste projeto é evoluir um chatbot financeiro tradicional para um **Agente Inteligente, Proativo e Consultivo**. Focado na realidade socioeconômica brasileira, o sistema atua na raiz do endividamento: identificando "vazamentos financeiros" ocultos e guiando o usuário de forma totalmente segura na construção de sua primeira **Reserva de Emergência**.
 
 ---
 
-## O Que Você Deve Entregar
+## 📌 Funcionalidades Principais
 
-### 1. Documentação do Agente
-
-Defina **o que** seu agente faz e **como** ele funciona:
-
-- **Caso de Uso:** Qual problema financeiro ele resolve? (ex: consultoria de investimentos, planejamento de metas, alertas de gastos)
-- **Persona e Tom de Voz:** Como o agente se comporta e se comunica?
-- **Arquitetura:** Fluxo de dados e integração com a base de conhecimento
-- **Segurança:** Como evitar alucinações e garantir respostas confiáveis?
-
-📄 **Template:** [`docs/01-documentacao-agente.md`](./docs/01-documentacao-agente.md)
+* **Diagnóstico de Vazamentos (Estancamento):** Varre e processa o histórico de transações (`transacoes.csv`) via Pandas para categorizar despesas e alertar o usuário sobre gastos invisíveis e gargalos orçamentários.
+* **Projeção de Reserva de Emergência:** Calcula automaticamente o custo de vida médio mensal do usuário e estipula a meta ideal para cobrir 6 meses de imprevistos.
+* **Filtro de Alocação Segura:** Recomenda onde guardar o capital poupado utilizando única e estritamente os ativos de Renda Fixa com liquidez imediata listados no catálogo institucional (`produtos_financeiros.json`).
+* **Arquitetura Anti-Alucinação (Zero-Risk):** Uso de instruções de sistema (*System Instructions*) severas e parametrização de baixa temperatura (`0.2`) no modelo Gemini para mitigar riscos de recomendações falsas ou fora de conformidade.
 
 ---
 
-### 2. Base de Conhecimento
+## ⚙️ Interface da Aplicação
 
-Utilize os **dados mockados** disponíveis na pasta [`data/`](./data/) para alimentar seu agente:
+### Tela Principal do Chatbot
+Assim que iniciado, o sistema carrega os dados mockados em segundo plano e a assistente BIA inicia a abordagem de forma contextualizada e acolhedora:
 
-| Arquivo | Formato | Descrição |
-|---------|---------|-----------|
-| `transacoes.csv` | CSV | Histórico de transações do cliente |
-| `historico_atendimento.csv` | CSV | Histórico de atendimentos anteriores |
-| `perfil_investidor.json` | JSON | Perfil e preferências do cliente |
-| `produtos_financeiros.json` | JSON | Produtos e serviços disponíveis |
+![alt text](images/apresentação_Bia.png)
 
-Você pode adaptar ou expandir esses dados conforme seu caso de uso.
+### Teste de Inteligência e Restrição de Contexto
+Ao ser questionada sobre investimentos voláteis (Renda Variável/Criptoativos) ou temas fora do escopo, a BIA barra a solicitação educadamente e mantém o foco no colchão de liquidez:
 
-📄 **Template:** [`docs/02-base-conhecimento.md`](./docs/02-base-conhecimento.md)
 
----
+![alt text](images/resposta_1.jpeg)
 
-### 3. Prompts do Agente
 
-Documente os prompts que definem o comportamento do seu agente:
 
-- **System Prompt:** Instruções gerais de comportamento e restrições
-- **Exemplos de Interação:** Cenários de uso com entrada e saída esperada
-- **Tratamento de Edge Cases:** Como o agente lida com situações limite
-
-📄 **Template:** [`docs/03-prompts.md`](./docs/03-prompts.md)
+![alt text](images/resposta_2.jpeg)
 
 ---
 
-### 4. Aplicação Funcional
+## 🛠️ Tecnologias e Ferramentas Utilizadas
 
-Desenvolva um **protótipo funcional** do seu agente:
-
-- Chatbot interativo (sugestão: Streamlit, Gradio ou similar)
-- Integração com LLM (via API ou modelo local)
-- Conexão com a base de conhecimento
-
-📁 **Pasta:** [`src/`](./src/)
+* **Linguagem:** Python 3.10+
+* **Framework Web:** Streamlit (Criação da interface de chat interativa)
+* **Manipulação de Dados:** Pandas (Pipeline de ingestão, parsing de data e agregação de despesas)
+* **Modelo de Linguagem (LLM):** Gemini 2.5 Flash (via SDK oficial atualizado `google-genai`)
 
 ---
 
-### 5. Avaliação e Métricas
+## 📐 Arquitetura do Sistema
 
-Descreva como você avalia a qualidade do seu agente:
+O fluxo de processamento de mensagens e ancoragem de contexto (Grounding) segue a estrutura técnica mapeada abaixo:
 
-**Métricas Sugeridas:**
-- Precisão/assertividade das respostas
-- Taxa de respostas seguras (sem alucinações)
-- Coerência com o perfil do cliente
-
-📄 **Template:** [`docs/04-metricas.md`](./docs/04-metricas.md)
-
----
-
-### 6. Pitch
-
-Grave um **pitch de 3 minutos** (estilo elevador) apresentando:
-
-- Qual problema seu agente resolve?
-- Como ele funciona na prática?
-- Por que essa solução é inovadora?
-
-📄 **Template:** [`docs/05-pitch.md`](./docs/05-pitch.md)
-
----
-
-## Ferramentas Sugeridas
-
-Todas as ferramentas abaixo possuem versões gratuitas:
-
-| Categoria | Ferramentas |
-|-----------|-------------|
-| **LLMs** | [ChatGPT](https://chat.openai.com/), [Copilot](https://copilot.microsoft.com/), [Gemini](https://gemini.google.com/), [Claude](https://claude.ai/), [Ollama](https://ollama.ai/) |
-| **Desenvolvimento** | [Streamlit](https://streamlit.io/), [Gradio](https://www.gradio.app/), [Google Colab](https://colab.research.google.com/) |
-| **Orquestração** | [LangChain](https://www.langchain.com/), [LangFlow](https://www.langflow.org/), [CrewAI](https://www.crewai.com/) |
-| **Diagramas** | [Mermaid](https://mermaid.js.org/), [Draw.io](https://app.diagrams.net/), [Excalidraw](https://excalidraw.com/) |
-
----
-
-## Estrutura do Repositório
-
-```
-📁 lab-agente-financeiro/
-│
-├── 📄 README.md
-│
-├── 📁 data/                          # Dados mockados para o agente
-│   ├── historico_atendimento.csv     # Histórico de atendimentos (CSV)
-│   ├── perfil_investidor.json        # Perfil do cliente (JSON)
-│   ├── produtos_financeiros.json     # Produtos disponíveis (JSON)
-│   └── transacoes.csv                # Histórico de transações (CSV)
-│
-├── 📁 docs/                          # Documentação do projeto
-│   ├── 01-documentacao-agente.md     # Caso de uso e arquitetura
-│   ├── 02-base-conhecimento.md       # Estratégia de dados
-│   ├── 03-prompts.md                 # Engenharia de prompts
-│   ├── 04-metricas.md                # Avaliação e métricas
-│   └── 05-pitch.md                   # Roteiro do pitch
-│
-├── 📁 src/                           # Código da aplicação
-│   └── app.py                        # (exemplo de estrutura)
-│
-├── 📁 assets/                        # Imagens e diagramas
-│   └── ...
-│
-└── 📁 examples/                      # Referências e exemplos
-    └── README.md
-```
-
----
-
-## Dicas Finais
-
-1. **Comece pelo prompt:** Um bom system prompt é a base de um agente eficaz
-2. **Use os dados mockados:** Eles garantem consistência e evitam problemas com dados sensíveis
-3. **Foque na segurança:** No setor financeiro, evitar alucinações é crítico
-4. **Teste cenários reais:** Simule perguntas que um cliente faria de verdade
-5. **Seja direto no pitch:** 3 minutos passam rápido, vá ao ponto
+```mermaid
+flowchart TD
+    A[Cliente / Usuário] -->|Mensagem de Texto| B[Interface Visual Streamlit]
+    B --> C[Orquestrador Python]
+    D[(Base de Dados: CSV / JSON)] -->|Pipeline Pandas Cacheado| C
+    C -->|Prompt + Contexto Métrico Consolidado| E[LLM Gemini 2.5 Flash]
+    E -->|Validação por Baixa Temperatura| F[Resposta Segura e Embasada]
+    F --> B
