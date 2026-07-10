@@ -56,9 +56,7 @@ flowchart TD
     E -->|Validação por Baixa Temperatura| F[Resposta Segura e Embasada]
     F --> B
 
-
----
-
+```
 ---
 
 ## 🚀 Como Executar o Projeto Localmente
