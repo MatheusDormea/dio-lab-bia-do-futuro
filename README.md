@@ -55,3 +55,80 @@ flowchart TD
     C -->|Prompt + Contexto Métrico Consolidado| E[LLM Gemini 2.5 Flash]
     E -->|Validação por Baixa Temperatura| F[Resposta Segura e Embasada]
     F --> B
+
+
+---
+
+---
+
+## 🚀 Como Executar o Projeto Localmente
+
+### 1. Clonar o Repositório e Estruturar as Pastas
+Certifique-se de que sua árvore de diretórios local está organizada exatamente desta forma para que os caminhos do código funcionem:
+```text
+├── data/
+│   ├── transacoes.csv
+│   ├── perfil_investidor.json
+│   └── produtos_financeiros.json
+└── src/
+    └── app.py
+    ## 2. Instalar as Dependências
+
+Abra o terminal na pasta raiz do seu projeto e instale os pacotes necessários utilizando o `pip`:
+
+```bash
+pip install streamlit google-genai pandas
+```
+
+---
+
+## 3. Configurar a Chave de API do Gemini
+
+Para proteger suas credenciais e evitar expor sua chave publicamente no GitHub, o agente foi desenhado para ler a chave via variável de ambiente.
+
+Obtenha sua chave gratuita no Google AI Studio e defina-a no seu terminal antes de rodar o script.
+
+### Windows (Prompt de Comando - CMD)
+
+```cmd
+set GEMINI_API_KEY=sua_chave
+```
+
+### Windows (PowerShell)
+
+```powershell
+$env:GEMINI_API_KEY="sua_chave"
+```
+
+### Linux ou macOS (Terminal)
+
+```bash
+export GEMINI_API_KEY="sua_chave"
+```
+
+---
+
+## 4. Inicializar o Servidor do Streamlit
+
+Com a chave de API configurada, execute o comando abaixo no mesmo terminal para iniciar a aplicação:
+
+```bash
+streamlit run src/app.py
+```
+
+Após a execução, uma aba do navegador padrão será aberta automaticamente no endereço:
+
+```text
+http://localhost:8501
+```
+
+---
+
+# 🛡️ Notas de Conformidade e Isenção Legal
+
+> [!IMPORTANT]
+> Este projeto possui caráter **estritamente educacional e laboratorial**, desenvolvido como parte do ecossistema de aprendizado da **DIO (Digital Innovation One)**.
+>
+> As análises de vazamentos orçamentários, os cálculos métricos de custos e as indicações de alocação de ativos apresentados pela assistente virtual baseiam-se **única e exclusivamente** em dados simulados e estáticos contidos nos arquivos locais (`.csv` e `.json`).
+>
+> O sistema **não realiza operações financeiras reais**, **não possui integração com APIs bancárias ativas** e **não constitui, sob nenhuma hipótese**, recomendação formal ou aconselhamento de investimentos regulamentado pela **CVM (Comissão de Valores Mobiliários)**.
